@@ -1,3 +1,48 @@
+# _The TapRoomJSX_
+
+#### _This is a live web application built using ReactJS. July 3rd, 2020_
+
+#### By Brevin Cronk
+
+## Description
+#### The purpose of this application is to prove my understand of functional programming with ReactJS.This is a live web application for a Tap Room where the user can add,delete and update the current stock of the Tap Room.
+
+
+## Known Bugs
+* No Known Bugs Yet
+
+
+## Component Flow Chart
+<details>
+<summary>Click to See Component Flow Chart</summary>
+<img src="./img/flowchart.png" width="45%">
+</details>
+
+## Specs
+### User Can See a List of All Kegs
+* Input: "Click here to see list of kegs"
+* Output: "Space Dust, Willy Haze, Rude Parrot"
+
+### User Can Add To  Keg List
+* Input: "Click here to add your keg"
+* Output: "Space Dust, Willy Haze, Rude Parrot, and Mac and Jacks: Thanks for adding new drinks!"
+
+### User Can Click and See Keg Details
+* Input: "Click here to see Details on Space Dust"
+* Output: "Space Dust IPA: $4.99, 5% alcohol, 34 pints left"
+
+### User Can Delete Kegs
+* Input: "Click here to Delete Space Dust"
+* Output: "Willy Haze, Rude Parrot, Mac and Jacks"
+
+### User Can Update Kegs
+* Input: "Click here to Update Space Dust"
+* Output: "Space Dust IPA: $4.99, 6% alcohol, 32 pints left"
+
+
+
+<details>
+<summary>Click to see NPM Instructions</summary>
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -66,3 +111,21 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+</details>
+
+
+## Technologies Used
+* ReactJS
+* Visual Studio Code
+* Draw.IO
+* Node
+
+### License
+This software is licensed under the MIT license.
+
+
+Copyright (c) 2020 **_Brevin Cronk_**
+
+
+
+
