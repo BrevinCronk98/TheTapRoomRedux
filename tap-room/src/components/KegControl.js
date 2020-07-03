@@ -1,12 +1,15 @@
 import React from 'react';
 import KegList from './KegList';
 import NewKegForm from './NewKegForm';
+import KegDetails from './KegDetails';
 
 class KegControl extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			formVisibleOnPage: false,
+			selectedKeg: null,
+			editing: false,
 			kegList: [
 				{
 					kegBrand: 'Elysian Brewery',
@@ -74,14 +77,66 @@ class KegControl extends React.Component {
 		});
 	};
 
+	hanleChangingSelectedKeg = (id) => {
+		const selectedKeg = this.state.kegList.filter((keg) => keg.id === id)[0];
+		this.setState({ selectedKeg: selectedKeg });
+	};
+
+	handleDeletingKeg = (id) => {
+		const newKegList = this.state.kegList.filter((keg) => keg.id !== id);
+		this.setState({
+			kegList: newKegList,
+			selectedKeg: null
+		});
+	};
+
+	handleEditClick = () => {
+		this.setState({ editing: true });
+	};
+
+	handleBuyingKeg = (id) => {
+		const purchasedKeg = this.state.kegList.filter((keg) => keg.id === id)[0];
+		purchasedKeg.kegQuantity -= 1;
+		const newKegList = this.state.kegList
+			.filter((keg) => keg.id !== this.state.selectedKeg.id)
+			.concate(purchasedKeg);
+		this.setState({ kegList: newKegList });
+	};
+
+	handleRestockingKeg = (id) => {
+		const restockedKeg = this.state.kegList.filter((keg) => keg.id === id)[0];
+		restockedKeg.kegQuantity += 124;
+		if (restockedKeg.kegQuantity >= 124) {
+			restockedKeg.kegQuantity = 124;
+		}
+		const newKegList = this.state.kegList
+			.filter((keg) => keg.id !== this.state.selectedKeg.id)
+			.concat(restockedKeg);
+		this.setState({ kegList: newKegList });
+	};
+
 	render() {
 		let currentlyVisibleState = null;
 		let buttonText = null;
+
 		if (this.state.formVisibleOnPage) {
 			currentlyVisibleState = <NewKegForm onNewKegCreation={this.handleAddingNewKegToList} />;
 			buttonText = 'Return To Keg List';
+		} else if (this.state.selectedKeg !== null) {
+			currentlyVisibleState = (
+				<KegDetails
+					keg={this.state.selectedKeg}
+					onClickDelete={this.handleDeletingKeg}
+					onClickEit={this.handleEditClick}
+					onClickBuy={this.handleBuyingKeg}
+					onClickRestock={this.handleRestockingKeg}
+				/>
+			);
+			buttonText = 'Return To Kegs';
 		} else {
-			currentlyVisibleState = <KegList kegList={this.state.kegList} />;
+			currentlyVisibleState = (
+				<KegList kegList={this.state.kegList} onKegSelection={this.hanleChangingSelectedKeg} />
+			);
 			buttonText = 'Add a New Drink';
 		}
 
