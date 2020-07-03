@@ -21,6 +21,8 @@ function NewKegForm(props) {
 				<input type="text" name="kegName" placeholder="Enter a Drink Name!" />
 				<input type="text" name="kegPrice" placeholder="Enter the Price!" />
 				<input type="text" name="kegAlcoPerc" placeholder="Enter the Alcohol Percentage!" />
+				<input type="text" name="kegQuantity" placeholder="Enter the Total Pints" />
+				<button type="submit">Add Keg</button>
 			</form>
 		</React.Fragment>
 	);
