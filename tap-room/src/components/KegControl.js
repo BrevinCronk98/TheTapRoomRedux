@@ -1,5 +1,6 @@
 import React from 'react';
 import KegList from './KegList';
+import NewKegForm from './NewKegForm';
 
 class KegControl extends React.Component {
 	constructor(props) {
@@ -59,16 +60,35 @@ class KegControl extends React.Component {
 		};
 	}
 
-	handleClick() {
+	handleClick = () => {
 		this.setState((prevState) => ({
 			formVisibleOnPage: !prevState.formVisibleOnPage
 		}));
-	}
+	};
+
+	handleAddingNewKegToList = (newKeg) => {
+		const newKegList = this.state.kegList.concat(newKeg);
+		this.setState({
+			kegList: newKegList,
+			formVisibleOnPage: false
+		});
+	};
+
 	render() {
+		let currentlyVisibleState = null;
+		let buttonText = null;
+		if (this.state.formVisibleOnPage) {
+			currentlyVisibleState = <NewKegForm onNewKegCreation={this.handleAddingNewKegToList} />;
+			buttonText = 'Return To Keg List';
+		} else {
+			currentlyVisibleState = <KegList kegList={this.state.kegList} />;
+			buttonText = 'Add a New Drink';
+		}
+
 		return (
 			<React.Fragment>
-				<KegList kegList={this.state.kegList} />
-				<button>Go To Form</button>
+				{currentlyVisibleState}
+				<button onClick={this.handleClick}>{buttonText}</button>
 			</React.Fragment>
 		);
 	}
