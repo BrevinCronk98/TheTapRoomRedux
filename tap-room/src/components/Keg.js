@@ -24,3 +24,5 @@ Keg.propTypes = {
 	kegBrand: PropTypes.string,
 	kegAlcoPerc: PropTypes.string
 };
+
+export default Keg;
