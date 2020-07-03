@@ -11,7 +11,7 @@ function KegDetails(props) {
 			<h3>{keg.kegPrice}</h3>
 			<h3>{keg.kegAlcoPerc}</h3>
 			<h3>{keg.kegQuantity}</h3>
-			<button onClick={props.onClickingEdit}>Update Keg</button>
+			<button onClick={props.onClickEdit}>Update Keg</button>
 			<button onClick={() => onClickDelete(keg.id)}>Delete keg</button>
 			<button onClick={() => onClickBuy(keg.id)}>Buy keg</button>
 			<button onClick={() => onClickRestock(keg.id)}>Restock keg</button>
