@@ -60,7 +60,7 @@ class KegControl extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-				<KegList />
+				<KegList kegList={this.state.kegList} />
 			</React.Fragment>
 		);
 	}

@@ -7,7 +7,6 @@ function KegList(props) {
 		<React.Fragment>
 			{props.kegList.map((keg) => (
 				<Keg
-					whenKegClicked={props.onKegSelection}
 					kegBrand={keg.kegBrand}
 					kegName={keg.kegName}
 					kegPrice={keg.kegPrice}
