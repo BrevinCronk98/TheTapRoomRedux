@@ -5,6 +5,7 @@ class KegControl extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			formVisibleOnPage: false,
 			kegList: [
 				{
 					kegBrand: 'Elysian Brewery',
@@ -57,10 +58,17 @@ class KegControl extends React.Component {
 			]
 		};
 	}
+
+	handleClick() {
+		this.setState((prevState) => ({
+			formVisibleOnPage: !prevState.formVisibleOnPage
+		}));
+	}
 	render() {
 		return (
 			<React.Fragment>
 				<KegList kegList={this.state.kegList} />
+				<button>Go To Form</button>
 			</React.Fragment>
 		);
 	}
