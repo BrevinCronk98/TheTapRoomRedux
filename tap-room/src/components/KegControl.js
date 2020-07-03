@@ -16,7 +16,7 @@ class KegControl extends React.Component {
 					kegName: 'Space Dust',
 					kegPrice: 5,
 					kegAlcoPerc: '8.2%',
-					kegQuantity: 44,
+					kegQuantity: 124,
 					id: '0'
 				},
 				{
@@ -24,7 +24,7 @@ class KegControl extends React.Component {
 					kegName: 'Willy Maze Haze',
 					kegPrice: 5,
 					kegAlcoPerc: '8.4%',
-					kegQuantity: 23,
+					kegQuantity: 124,
 					id: '1'
 				},
 				{
@@ -32,7 +32,7 @@ class KegControl extends React.Component {
 					kegName: 'Bud Light',
 					kegPrice: 3,
 					kegAlcoPerc: '3.2%',
-					kegQuantity: 66,
+					kegQuantity: 124,
 					id: '2'
 				},
 				{
@@ -40,7 +40,7 @@ class KegControl extends React.Component {
 					kegName: 'Corona Extra',
 					kegPrice: 4,
 					kegAlcoPerc: '4.6%',
-					kegQuantity: 76,
+					kegQuantity: 124,
 					id: '3'
 				},
 				{
@@ -48,7 +48,7 @@ class KegControl extends React.Component {
 					kegName: 'Modelo Especial',
 					kegPrice: 4,
 					kegAlcoPerc: '3.9%',
-					kegQuantity: 32,
+					kegQuantity: 124,
 					id: '4'
 				},
 				{
@@ -56,7 +56,7 @@ class KegControl extends React.Component {
 					kegName: 'Heineken Lager',
 					kegPrice: 3,
 					kegAlcoPerc: '4.2%',
-					kegQuantity: 45,
+					kegQuantity: 124,
 					id: '5'
 				}
 			]
@@ -64,9 +64,17 @@ class KegControl extends React.Component {
 	}
 
 	handleClick = () => {
-		this.setState((prevState) => ({
-			formVisibleOnPage: !prevState.formVisibleOnPage
-		}));
+		if (this.state.selectedKeg != null) {
+			this.setState({
+				formVisibleOnPage: false,
+				selectedKeg: null,
+				editing: false
+			});
+		} else {
+			this.setState((prevState) => ({
+				formVisibleOnPage: !prevState.formVisibleOnPage
+			}));
+		}
 	};
 
 	handleAddingNewKegToList = (newKeg) => {
@@ -99,7 +107,7 @@ class KegControl extends React.Component {
 		purchasedKeg.kegQuantity -= 1;
 		const newKegList = this.state.kegList
 			.filter((keg) => keg.id !== this.state.selectedKeg.id)
-			.concate(purchasedKeg);
+			.concat(purchasedKeg);
 		this.setState({ kegList: newKegList });
 	};
 
