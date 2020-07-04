@@ -22,7 +22,8 @@ function KegList(props) {
 }
 KegList.propTypes = {
 	kegList: PropTypes.array,
-	onKegSelection: PropTypes.func
+	onKegSelection: PropTypes.func,
+	onClickBuy: PropTypes.func
 };
 
 export default KegList;

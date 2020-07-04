@@ -27,3 +27,26 @@ body {
 	color: lightgrey;
 	font-size: 28px;
 }
+
+#details {
+	text-align: center;
+}
+
+#btn {
+	margin: .5%;
+	border-radius: 10px;
+	background-color: lavender;
+}
+
+#main-btn {
+	text-align: center;
+	border-radius: 10px;
+}
+
+#form {
+	text-align: center;
+}
+
+#input {
+	margin: 1%;
+}
