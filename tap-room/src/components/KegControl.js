@@ -119,7 +119,7 @@ class KegControl extends React.Component {
 			.concat(purchasedKeg);
 		const wallet = parseInt(this.state.userMoney);
 		const newPrice = parseInt(this.state.kegPrice);
-		const newWallet = wallet - newPrice;
+		// const newWallet = wallet - newPrice;
 		console.log(typeof wallet);
 		console.log(typeof newPrice);
 		this.setState({ kegList: newKegList });
