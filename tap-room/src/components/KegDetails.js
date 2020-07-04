@@ -7,22 +7,22 @@ function KegDetails(props) {
 		<React.Fragment>
 			<div id="details">
 				<h1>Keg Details</h1>
-				<h3>{keg.kegBrand}</h3>
-				<h3>{keg.kegName}</h3>
-				<h3>{keg.kegPrice}</h3>
-				<h3>{keg.kegAlcoPerc}</h3>
-				<h3>{keg.kegQuantity}</h3>
+				<h4>Brand: {keg.kegBrand}</h4>
+				<h4>Drink: {keg.kegName}</h4>
+				<h4>Price: {keg.kegPrice} Dollars</h4>
+				<h4>ACV:{keg.kegAlcoPerc}</h4>
+				<h4>Drinks Remaining: {keg.kegQuantity} Pints</h4>
 				<button id="btn" onClick={props.onClickEdit}>
 					Update Keg
 				</button>
 				<button id="btn" onClick={() => onClickDelete(keg.id)}>
-					Delete keg
+					Delete Keg
 				</button>
 				<button id="btn" onClick={() => onClickBuy(keg.id)}>
-					Buy keg
+					Buy Pint
 				</button>
 				<button id="btn" onClick={() => onClickRestock(keg.id)}>
-					Restock keg
+					Restock Keg
 				</button>
 			</div>
 

@@ -4,6 +4,7 @@ body {
 
 #kegList {
 	text-align: center;
+	margin-top: 4.09%;
 }
 
 #headbar {
@@ -38,9 +39,12 @@ body {
 	background-color: lavender;
 }
 
-#main-btn {
+#main {
 	text-align: center;
-	border-radius: 10px;
+}
+
+#main-btn {
+	border-radius: 15px;
 }
 
 #form {
@@ -48,5 +52,17 @@ body {
 }
 
 #input {
-	margin: 1%;
+	margin: .5%;
+	border-radius: 10px;
+}
+
+#label {
+	font-weight: bolder;
+}
+
+#wallet {
+	float: right;
+	font-size: 25px;
+	border: 2px solid white;
+	border-radius: 5px;
 }

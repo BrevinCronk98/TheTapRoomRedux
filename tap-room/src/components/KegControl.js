@@ -11,6 +11,8 @@ class KegControl extends React.Component {
 			formVisibleOnPage: false,
 			selectedKeg: null,
 			editing: false,
+			broke: false,
+			userMoney: 100,
 			kegList: [
 				{
 					kegBrand: 'Elysian Brewery',
@@ -110,10 +112,13 @@ class KegControl extends React.Component {
 		if (purchasedKeg.kegQuantity < 0) {
 			purchasedKeg.kegQuantity = 0;
 		}
+
 		const newKegList = this.state.kegList
 			.filter((keg) => keg.id !== this.state.selectedKeg.id)
 			.concat(purchasedKeg);
+		const newWallet = this.state.userMoney;
 		this.setState({ kegList: newKegList });
+		this.setState({ userMoney: newWallet });
 	};
 
 	handleRestockingKeg = (id) => {
@@ -171,9 +176,13 @@ class KegControl extends React.Component {
 
 		return (
 			<React.Fragment>
+				<h4 id="wallet">Your Wallet: ${this.state.userMoney}</h4>
+				<br />
 				{currentlyVisibleState}
-				<div id="main-btn">
-					<button onClick={this.handleClick}>{buttonText}</button>
+				<div id="main">
+					<button id="main-btn" onClick={this.handleClick}>
+						{buttonText}
+					</button>
 				</div>
 			</React.Fragment>
 		);
