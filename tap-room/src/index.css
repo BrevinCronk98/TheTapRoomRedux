@@ -1,13 +1,29 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	background-color: darkslategray;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#kegList {
+	text-align: center;
+}
+
+#headbar {
+	border-top: 3px solid black;
+}
+
+#header {
+	text-align: center;
+	margin-bottom: 2%;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	text-shadow: black 2px 2px;
+	background-color: gray;
+}
+
+#store {
+	font-size: 45px;
+	color: lemonchiffon;
+}
+
+#greeting {
+	color: lightgrey;
+	font-size: 28px;
 }
