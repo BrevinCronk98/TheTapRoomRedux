@@ -3,6 +3,7 @@ import KegList from './KegList';
 import NewKegForm from './NewKegForm';
 import KegDetails from './KegDetails';
 import EditKegForm from './EditKegForm';
+import PropTypes from 'prop-types';
 
 class KegControl extends React.Component {
 	constructor(props) {
@@ -116,9 +117,13 @@ class KegControl extends React.Component {
 		const newKegList = this.state.kegList
 			.filter((keg) => keg.id !== this.state.selectedKeg.id)
 			.concat(purchasedKeg);
-		const newWallet = this.state.userMoney;
+		const wallet = parseInt(this.state.userMoney);
+		const newPrice = parseInt(this.state.kegPrice);
+		const newWallet = wallet - newPrice;
+		console.log(typeof wallet);
+		console.log(typeof newPrice);
 		this.setState({ kegList: newKegList });
-		this.setState({ userMoney: newWallet });
+		// this.setState({ userMoney: newWallet});
 	};
 
 	handleRestockingKeg = (id) => {
@@ -188,5 +193,9 @@ class KegControl extends React.Component {
 		);
 	}
 }
+
+KegControl.propTypes = {
+	userMoney: PropTypes.number
+};
 
 export default KegControl;
