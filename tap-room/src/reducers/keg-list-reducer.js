@@ -11,10 +11,10 @@ export default (state = {}, action) => {
 					kegPrice: kegPrice,
 					kegAlcoPerc: kegAlcoPerc,
 					kegQuantity: kegQuantity,
-					id: id
+					id: i
 				}
 			});
-		case 'DELETE_KEG':
+		case c.DELETE_KEG:
 			const newState = { ...state };
 			delete newState[id];
 			return newState;

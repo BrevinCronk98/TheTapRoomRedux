@@ -2,6 +2,7 @@ import rootReducer from '../../reducers/index';
 import formVisibleReducer from '../../reducers/form-visible-reducer';
 import kegListReducer from '../../reducers/keg-list-reducer';
 import { createStore } from 'redux';
+import * as c from '../../actions/actionTypes';
 
 let store = createStore(rootReducer);
 
@@ -17,7 +18,7 @@ describe('rootReducer', () => {
 	// Test Two
 	test('Check that the initial state of kegListReducer matches root reducer', () => {
 		const action = {
-			type: 'ADD_KEG',
+			type: c.ADD_KEG,
 			kegBrand: 'Corona',
 			kegName: 'Premier',
 			kegPrice: 5,
@@ -32,7 +33,7 @@ describe('rootReducer', () => {
 	// Test Three
 	test('Check that the initial state of formVisibleReducer matches rootReducer', () => {
 		const action = {
-			type: 'TOGGLE_FORM'
+			type: c.TOGGLE_FORM
 		};
 		store.dispatch(action);
 		expect(store.getState().formVisibleOnPage).toEqual(formVisibleReducer(undefined, action));
