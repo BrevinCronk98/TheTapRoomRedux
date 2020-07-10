@@ -16,56 +16,7 @@ class KegControl extends React.Component {
 			editing: false,
 			broke: false,
 			userMoney: 100,
-			kegList: [
-				{
-					kegBrand: 'Elysian Brewery',
-					kegName: 'Space Dust',
-					kegPrice: 5,
-					kegAlcoPerc: '8.2%',
-					kegQuantity: 124,
-					id: '0'
-				},
-				{
-					kegBrand: 'Sacred Hop Brewery Co.',
-					kegName: 'Willy Maze Haze',
-					kegPrice: 5,
-					kegAlcoPerc: '8.4%',
-					kegQuantity: 124,
-					id: '1'
-				},
-				{
-					kegBrand: 'Bud Light Brewery',
-					kegName: 'Bud Light',
-					kegPrice: 3,
-					kegAlcoPerc: '3.2%',
-					kegQuantity: 124,
-					id: '2'
-				},
-				{
-					kegBrand: 'Corona',
-					kegName: 'Corona Extra',
-					kegPrice: 4,
-					kegAlcoPerc: '4.6%',
-					kegQuantity: 124,
-					id: '3'
-				},
-				{
-					kegBrand: 'Modelo',
-					kegName: 'Modelo Especial',
-					kegPrice: 4,
-					kegAlcoPerc: '3.9%',
-					kegQuantity: 124,
-					id: '4'
-				},
-				{
-					kegBrand: 'Heineken',
-					kegName: 'Heineken Lager',
-					kegPrice: 3,
-					kegAlcoPerc: '4.2%',
-					kegQuantity: 124,
-					id: '5'
-				}
-			]
+			kegList: []
 		};
 	}
 
@@ -77,15 +28,25 @@ class KegControl extends React.Component {
 	};
 
 	handleAddingNewKegToList = (newKeg) => {
-		const newKegList = this.state.kegList.concat(newKeg);
+		const { dispatch } = this.props;
+		const { kegBrand, kegName, kegPrice, kegAlcoPerc, kegQuantity, id } = newKeg;
+		const action = {
+			type: a.addKeg(),
+			id: id,
+			kegBrand: kegBrand,
+			kegName: kegName,
+			kegPrice: kegPrice,
+			kegAlcoPerc: kegAlcoPerc,
+			kegQuantity: kegQuantity
+		};
+		dispatch(action);
 		this.setState({
-			kegList: newKegList,
 			formVisibleOnPage: false
 		});
 	};
 
 	hanleChangingSelectedKeg = (id) => {
-		const selectedKeg = this.state.kegList.filter((keg) => keg.id === id)[0];
+		const selectedKeg = this.props.kegList[id];
 		this.setState({ selectedKeg: selectedKeg });
 	};
 
@@ -152,7 +113,7 @@ class KegControl extends React.Component {
 			currentlyVisibleState = (
 				<EditKegForm keg={this.state.selectedKeg} onEditKeg={this.handleEditingKegInList} />
 			);
-			button = <button onClick={this.handleAddKegForm}>Back to Keg List</button>;
+			button = <button onClick={this.handleAddKegForm}>{buttonText}</button>;
 		} else if (this.state.formVisibleOnPage === true) {
 			currentlyVisibleState = <NewKegForm onNewKegCreation={this.handleAddingNewKegToList} />;
 			buttonText = 'Return To Keg List';
@@ -169,8 +130,9 @@ class KegControl extends React.Component {
 			buttonText = 'Return To Kegs';
 		} else {
 			currentlyVisibleState = (
-				<KegList kegList={this.state.kegList} onKegSelection={this.hanleChangingSelectedKeg} />
+				<KegList kegList={this.props.kegList} onKegSelection={this.hanleChangingSelectedKeg} />
 			);
+
 			buttonText = 'Add a New Drink';
 			button = <button onClick={this.handleAddKegForm}>Add Keg</button>;
 		}
