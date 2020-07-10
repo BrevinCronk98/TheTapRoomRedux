@@ -104,7 +104,6 @@ class KegControl extends React.Component {
 
 	handleEditClick = () => {
 		this.setState({ editing: true });
-		console.log('help');
 	};
 
 	handleBuyingKeg = (id) => {
