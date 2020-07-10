@@ -26,16 +26,18 @@ function KegControl(props) {
 	};
 
 	const handleChangingSelectedKeg = (id) => {
-		const selectedKeg = this.props.kegList[id];
-		this.setState({ selectedKeg: selectedKeg });
+		const { dispatch } = props;
+		const selectedKeg = Object.values(kegList).filter((keg) => keg.id === id)[0];
+		const action = a.selectKeg(selectedKeg);
+		dispatch(action);
 	};
 
 	const handleDeletingKeg = (id) => {
-		const newKegList = this.state.kegList.filter((keg) => keg.id !== id);
-		this.setState({
-			kegList: newKegList,
-			selectedKeg: null
-		});
+		const { dispatch } = props;
+		const action = a.deleteKeg(id);
+		dispatch(action);
+		const action2 = a.toggleForm();
+		dispatch(action2);
 	};
 
 	const handleEditClick = () => {

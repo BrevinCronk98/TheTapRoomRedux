@@ -27,22 +27,20 @@ export const toggleUpdateKeg = (id) => ({
 	id
 });
 
+export const toggleHome = () => ({
+	type: c.TOGGLE_HOME
+});
+
 export const selectKeg = (keg) => {
-	if (keg !== null) {
-		const { kegBrand, kegName, kegPrice, kegAlcoPerc, kegQuantity, id, key } = keg;
-		return {
-			type: c.SELECT_KEG,
-			kegBrand: kegBrand,
-			kegName: kegName,
-			kegPrice: kegPrice,
-			kegAlcoPerc: kegAlcoPerc,
-			kegQuantity: kegQuantity,
-			key: key,
-			id: id
-		};
-	} else {
-		return {
-			type: c.SELECT_KEG
-		};
-	}
+	const { kegBrand, kegName, kegPrice, kegAlcoPerc, kegQuantity, id, key } = keg;
+	return {
+		type: c.SELECT_KEG,
+		kegBrand: kegBrand,
+		kegName: kegName,
+		kegPrice: kegPrice,
+		kegAlcoPerc: kegAlcoPerc,
+		kegQuantity: kegQuantity,
+		key: key,
+		id: id
+	};
 };
