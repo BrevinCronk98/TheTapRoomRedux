@@ -1,7 +1,9 @@
+import * as c from './../actions/actionTypes';
+
 export default (state = {}, action) => {
 	const { kegBrand, kegName, kegPrice, kegAlcoPerc, kegQuantity, id } = action;
 	switch (action.type) {
-		case 'ADD_KEG':
+		case c.ADD_KEG:
 			return Object.assign({}, state, {
 				[id]: {
 					kegBrand: kegBrand,
