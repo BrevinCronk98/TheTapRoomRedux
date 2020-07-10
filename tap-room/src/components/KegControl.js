@@ -7,50 +7,30 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as a from './../actions/index';
 
-class KegControl extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			formVisibleOnPage: false,
-			selectedKeg: null,
-			editing: false,
-			broke: false,
-			userMoney: 100,
-			kegList: []
-		};
-	}
+function KegControl(props) {
+	const { formVisibleOnPage, selectedKeg, kegList, editing } = props;
 
-	handleAddKegForm = () => {
-		const { dispatch } = this.props;
+	const handleAddKegForm = () => {
+		const { dispatch } = props;
 		const action = a.toggleForm();
 		dispatch(action);
 		console.log('help');
 	};
 
-	handleAddingNewKegToList = (newKeg) => {
-		const { dispatch } = this.props;
-		const { kegBrand, kegName, kegPrice, kegAlcoPerc, kegQuantity, id } = newKeg;
-		const action = {
-			type: a.addKeg(),
-			id: id,
-			kegBrand: kegBrand,
-			kegName: kegName,
-			kegPrice: kegPrice,
-			kegAlcoPerc: kegAlcoPerc,
-			kegQuantity: kegQuantity
-		};
+	const handleAddingNewKegToList = (newKeg) => {
+		const { dispatch } = props;
+		const action = a.toggleForm();
 		dispatch(action);
-		this.setState({
-			formVisibleOnPage: false
-		});
+		const action2 = a.addKeg(newKeg);
+		dispatch(action2);
 	};
 
-	hanleChangingSelectedKeg = (id) => {
+	const handleChangingSelectedKeg = (id) => {
 		const selectedKeg = this.props.kegList[id];
 		this.setState({ selectedKeg: selectedKeg });
 	};
 
-	handleDeletingKeg = (id) => {
+	const handleDeletingKeg = (id) => {
 		const newKegList = this.state.kegList.filter((keg) => keg.id !== id);
 		this.setState({
 			kegList: newKegList,
@@ -58,11 +38,11 @@ class KegControl extends React.Component {
 		});
 	};
 
-	handleEditClick = () => {
+	const handleEditClick = () => {
 		this.setState({ editing: true });
 	};
 
-	handleBuyingKeg = (id) => {
+	const handleBuyingKeg = (id) => {
 		const purchasedKeg = this.state.kegList.filter((keg) => keg.id === id)[0];
 		purchasedKeg.kegQuantity -= 1;
 		if (purchasedKeg.kegQuantity < 0) {
@@ -81,7 +61,7 @@ class KegControl extends React.Component {
 		// this.setState({ userMoney: newWallet});
 	};
 
-	handleRestockingKeg = (id) => {
+	const handleRestockingKeg = (id) => {
 		const restockedKeg = this.state.kegList.filter((keg) => keg.id === id)[0];
 		restockedKeg.kegQuantity += 124;
 		if (restockedKeg.kegQuantity >= 124) {
@@ -93,7 +73,7 @@ class KegControl extends React.Component {
 		this.setState({ kegList: newKegList });
 	};
 
-	handleEditingKegInList = (kegToEdit) => {
+	const handleEditingKegInList = (kegToEdit) => {
 		const editedKegList = this.state.kegList
 			.filter((keg) => keg.id !== this.state.selectedKeg.id)
 			.concat(kegToEdit);
@@ -104,48 +84,40 @@ class KegControl extends React.Component {
 		});
 	};
 
-	render() {
-		let currentlyVisibleState = null;
-		let buttonText = null;
-		let button = null;
+	let currentlyVisibleState = null;
+	let buttonText = null;
+	let button = null;
 
-		if (this.state.editing) {
-			currentlyVisibleState = (
-				<EditKegForm keg={this.state.selectedKeg} onEditKeg={this.handleEditingKegInList} />
-			);
-			button = <button onClick={this.handleAddKegForm}>{buttonText}</button>;
-		} else if (this.state.formVisibleOnPage === true) {
-			currentlyVisibleState = <NewKegForm onNewKegCreation={this.handleAddingNewKegToList} />;
-			buttonText = 'Return To Keg List';
-		} else if (this.state.selectedKeg !== null) {
-			currentlyVisibleState = (
-				<KegDetails
-					keg={this.state.selectedKeg}
-					onClickDelete={this.handleDeletingKeg}
-					onClickEdit={this.handleEditClick}
-					onClickBuy={this.handleBuyingKeg}
-					onClickRestock={this.handleRestockingKeg}
-				/>
-			);
-			buttonText = 'Return To Kegs';
-		} else {
-			currentlyVisibleState = (
-				<KegList kegList={this.props.kegList} onKegSelection={this.hanleChangingSelectedKeg} />
-			);
-
-			buttonText = 'Add a New Drink';
-			button = <button onClick={this.handleAddKegForm}>Add Keg</button>;
-		}
-
-		return (
-			<React.Fragment>
-				<h4 id="wallet">Your Wallet: ${this.state.userMoney}</h4>
-				<br />
-				{currentlyVisibleState}
-				{button}
-			</React.Fragment>
+	if (editing) {
+		currentlyVisibleState = <EditKegForm keg={selectedKeg} onEditKeg={handleEditingKegInList} />;
+		button = <button onClick={handleAddKegForm}>{buttonText}</button>;
+	} else if (formVisibleOnPage) {
+		currentlyVisibleState = <NewKegForm onNewKegCreation={handleAddingNewKegToList} />;
+		buttonText = 'Return To Keg List';
+	} else if (selectedKeg !== null) {
+		currentlyVisibleState = (
+			<KegDetails
+				keg={selectedKeg}
+				onClickDelete={handleDeletingKeg}
+				onClickEdit={handleEditClick}
+				onClickBuy={handleBuyingKeg}
+				onClickRestock={handleRestockingKeg}
+			/>
 		);
+		buttonText = 'Return To Kegs';
+	} else {
+		currentlyVisibleState = <KegList kegList={kegList} onKegSelection={handleChangingSelectedKeg} />;
+
+		buttonText = 'Add a New Drink';
+		button = <button onClick={handleAddKegForm}>Add Keg</button>;
 	}
+
+	return (
+		<React.Fragment>
+			{currentlyVisibleState}
+			{button}
+		</React.Fragment>
+	);
 }
 
 const mapStateToProps = (state) => {
