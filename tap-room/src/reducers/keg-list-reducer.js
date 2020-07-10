@@ -11,7 +11,7 @@ export default (state = {}, action) => {
 					kegPrice: kegPrice,
 					kegAlcoPerc: kegAlcoPerc,
 					kegQuantity: kegQuantity,
-					id: i
+					id: id
 				}
 			});
 		case c.DELETE_KEG:

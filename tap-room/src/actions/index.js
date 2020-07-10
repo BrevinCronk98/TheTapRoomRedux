@@ -19,3 +19,7 @@ export const addKeg = (keg) => {
 		id
 	};
 };
+
+export const toggleUpdateKeg = () => ({
+	type: 'TOGGLE_EDIT_FORM'
+});
