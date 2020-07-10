@@ -73,6 +73,7 @@ class KegControl extends React.Component {
 		const { dispatch } = this.props;
 		const action = a.toggleForm();
 		dispatch(action);
+		console.log('help');
 	};
 
 	handleAddingNewKegToList = (newKeg) => {
@@ -145,13 +146,14 @@ class KegControl extends React.Component {
 	render() {
 		let currentlyVisibleState = null;
 		let buttonText = null;
+		let button = null;
 
 		if (this.state.editing) {
 			currentlyVisibleState = (
 				<EditKegForm keg={this.state.selectedKeg} onEditKeg={this.handleEditingKegInList} />
 			);
-			buttonText = 'Return to List';
-		} else if (this.state.formVisibleOnPage) {
+			button = <button onClick={this.handleAddKegForm}>Back to Keg List</button>;
+		} else if (this.state.formVisibleOnPage === true) {
 			currentlyVisibleState = <NewKegForm onNewKegCreation={this.handleAddingNewKegToList} />;
 			buttonText = 'Return To Keg List';
 		} else if (this.state.selectedKeg !== null) {
@@ -170,6 +172,7 @@ class KegControl extends React.Component {
 				<KegList kegList={this.state.kegList} onKegSelection={this.hanleChangingSelectedKeg} />
 			);
 			buttonText = 'Add a New Drink';
+			button = <button onClick={this.handleAddKegForm}>Add Keg</button>;
 		}
 
 		return (
@@ -177,11 +180,7 @@ class KegControl extends React.Component {
 				<h4 id="wallet">Your Wallet: ${this.state.userMoney}</h4>
 				<br />
 				{currentlyVisibleState}
-				<div id="main">
-					<button id="main-btn" onClick={this.handleClick}>
-						{buttonText}
-					</button>
-				</div>
+				{button}
 			</React.Fragment>
 		);
 	}
@@ -189,13 +188,19 @@ class KegControl extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
-		kegList: state
+		kegList: state.kegList,
+		formVisibleOnPage: state.formVisibleOnPage,
+		editing: state.editing,
+		selectedKeg: state.selectedKeg
 	};
 };
 KegControl = connect(mapStateToProps)(KegControl);
 
 KegControl.propTypes = {
-	userMoney: PropTypes.number
+	formVisibleOnPage: PropTypes.bool,
+	editing: PropTypes.bool,
+	selectedKeg: PropTypes.object,
+	kegList: PropTypes.object
 };
 
 export default KegControl;
