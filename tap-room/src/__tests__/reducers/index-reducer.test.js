@@ -13,4 +13,28 @@ describe('rootReducer', () => {
 			formVisibleOnPage: false
 		});
 	});
+
+	// Test Two
+	test('Check that the initial state of kegListReducer matches root reducer', () => {
+		const action = {
+			type: 'ADD_KEG',
+			kegBrand: 'Corona',
+			kegName: 'Premier',
+			kegPrice: 5,
+			kegAlcoPerc: '4.2',
+			kegQuantity: 5,
+			id: 1
+		};
+		store.dispatch(action);
+		expect(store.getState().kegList).toEqual(kegListReducer(undefined, action));
+	});
+
+	// Test Three
+	test('Check that the initial state of formVisibleReducer matches rootReducer', () => {
+		const action = {
+			type: 'TOGGLE_FORM'
+		};
+		store.dispatch(action);
+		expect(store.getState().formVisibleOnPage).toEqual(formVisibleReducer(undefined, action));
+	});
 });
