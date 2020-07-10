@@ -1,11 +1,19 @@
-import * as c from '../actions/actionTypes';
+import * as c from './../actions/ActionTypes';
 
-export default (state = {}, action) => {
-	const { selectedKeg } = action;
+export default (state = null, action) => {
+	const { kegBrand, kegName, kegPrice, kegAlcoPerc, kegQuantity, key, id } = action;
 	switch (action.type) {
 		case c.SELECT_KEG:
-			const selectedKeg = this.state.kegList.filter((keg) => keg.id === id)[0];
-
-			return selectedKeg;
+			return {
+				kegBrand: kegBrand,
+				kegName: kegName,
+				kegPrice: kegPrice,
+				kegAlcoPerc: kegAlcoPerc,
+				kegQuantity: kegQuantity,
+				id: id,
+				key: key
+			};
+		default:
+			return state;
 	}
 };
