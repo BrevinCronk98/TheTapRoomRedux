@@ -11,6 +11,14 @@ describe('kegListReducer', () => {
 			kegAlcoPerc: '4.2',
 			kegQuantity: 5,
 			id: 1
+		},
+		2: {
+			kegBrand: 'Elysian Brewery',
+			kegName: 'Space Dust',
+			kegPrice: 5,
+			kegAlcoPerc: '8.3',
+			kegQuantity: 5,
+			id: 1
 		}
 	};
 
@@ -48,6 +56,24 @@ describe('kegListReducer', () => {
 				kegAlcoPerc: kegAlcoPerc,
 				kegQuantity: kegQuantity,
 				id: id
+			}
+		});
+	});
+
+	// Test Three
+	test('Should successfully delete a ticket', () => {
+		action = {
+			type: 'DELETE_KEG',
+			id: 1
+		};
+		expect(kegListReducer(currentState, action)).toEqual({
+			2: {
+				kegBrand: 'Elysian Brewery',
+				kegName: 'Space Dust',
+				kegPrice: 5,
+				kegAlcoPerc: '8.3',
+				kegQuantity: 5,
+				id: 1
 			}
 		});
 	});
