@@ -1,4 +1,4 @@
-import * as c from './../actions/ActionTypes';
+import * as c from './../actions/actionTypes';
 
 export default (state = null, action) => {
 	const { kegBrand, kegName, kegPrice, kegAlcoPerc, kegQuantity, key, id } = action;

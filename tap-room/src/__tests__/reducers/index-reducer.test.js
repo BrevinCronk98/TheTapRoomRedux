@@ -31,7 +31,7 @@ describe('rootReducer', () => {
 			id: 1
 		};
 		store.dispatch(action);
-		expect(store.getState().kegList).toEqual(kegListReducer(undefined, { type: null }));
+		expect(store.getState().kegList).toEqual(kegListReducer(undefined, action));
 	});
 
 	// Test Three
@@ -40,7 +40,7 @@ describe('rootReducer', () => {
 			type: c.TOGGLE_FORM
 		};
 		store.dispatch(action);
-		expect(store.getState().formVisibleOnPage).toEqual(formVisibleReducer(undefined, { type: null }));
+		expect(store.getState().formVisibleOnPage).toEqual(formVisibleReducer(undefined, action));
 	});
 
 	// Test Four
@@ -49,7 +49,7 @@ describe('rootReducer', () => {
 			type: c.SELECT_KEG
 		};
 		store.dispatch(action);
-		expect(store.getState().selectedKeg).toEqual(selectedKegReducer(undefined, { type: null }));
+		expect(store.getState().selectedKeg).toEqual(selectedKegReducer(undefined, action));
 	});
 
 	// Test Five
@@ -58,6 +58,6 @@ describe('rootReducer', () => {
 			type: c.TOGGLE_EDIT_FORM
 		};
 		store.dispatch(action);
-		expect(store.getState().editing).toEqual(editFormReducer(undefined, { type: null }));
+		expect(store.getState().editing).toEqual(editFormReducer(undefined, action));
 	});
 });

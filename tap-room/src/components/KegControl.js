@@ -4,6 +4,8 @@ import NewKegForm from './NewKegForm';
 import KegDetails from './KegDetails';
 import EditKegForm from './EditKegForm';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import * as a from './../actions/index';
 
 class KegControl extends React.Component {
 	constructor(props) {
@@ -67,18 +69,10 @@ class KegControl extends React.Component {
 		};
 	}
 
-	handleClick = () => {
-		if (this.state.selectedKeg != null) {
-			this.setState({
-				formVisibleOnPage: false,
-				selectedKeg: null,
-				editing: false
-			});
-		} else {
-			this.setState((prevState) => ({
-				formVisibleOnPage: !prevState.formVisibleOnPage
-			}));
-		}
+	handleAddKegForm = () => {
+		const { dispatch } = this.props;
+		const action = a.toggleForm();
+		dispatch(action);
 	};
 
 	handleAddingNewKegToList = (newKeg) => {
@@ -192,6 +186,13 @@ class KegControl extends React.Component {
 		);
 	}
 }
+
+const mapStateToProps = (state) => {
+	return {
+		kegList: state
+	};
+};
+KegControl = connect(mapStateToProps)(KegControl);
 
 KegControl.propTypes = {
 	userMoney: PropTypes.number
