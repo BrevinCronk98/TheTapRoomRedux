@@ -12,7 +12,56 @@ describe('rootReducer', () => {
 	// Test One
 	test('Should return default state if no action type is recognized', () => {
 		expect(rootReducer({}, { type: null })).toEqual({
-			kegList: {},
+			kegList: {
+				0: {
+					kegBrand: 'Elysian Brewery',
+					kegName: 'Space Dust',
+					kegPrice: 5,
+					kegAlcoPerc: '8.2%',
+					kegQuantity: 124,
+					id: '0'
+				},
+				1: {
+					kegBrand: 'Sacred Hop Brewery Co.',
+					kegName: 'Willy Maze Haze',
+					kegPrice: 5,
+					kegAlcoPerc: '8.4%',
+					kegQuantity: 124,
+					id: '1'
+				},
+				2: {
+					kegBrand: 'Bud Light Brewery',
+					kegName: 'Bud Light',
+					kegPrice: 3,
+					kegAlcoPerc: '3.2%',
+					kegQuantity: 124,
+					id: '2'
+				},
+				3: {
+					kegBrand: 'Corona',
+					kegName: 'Corona Extra',
+					kegPrice: 4,
+					kegAlcoPerc: '4.6%',
+					kegQuantity: 124,
+					id: '3'
+				},
+				4: {
+					kegBrand: 'Modelo',
+					kegName: 'Modelo Especial',
+					kegPrice: 4,
+					kegAlcoPerc: '3.9%',
+					kegQuantity: 124,
+					id: '4'
+				},
+				5: {
+					kegBrand: 'Heineken',
+					kegName: 'Heineken Lager',
+					kegPrice: 3,
+					kegAlcoPerc: '4.2%',
+					kegQuantity: 124,
+					id: '5'
+				}
+			},
 			formVisibleOnPage: false,
 			editing: false,
 			selectedKeg: null

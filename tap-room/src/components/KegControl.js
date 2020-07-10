@@ -36,8 +36,6 @@ function KegControl(props) {
 		const { dispatch } = props;
 		const action = a.deleteKeg(id);
 		dispatch(action);
-		const action2 = a.toggleForm();
-		dispatch(action2);
 	};
 
 	const handleEditClick = () => {
@@ -45,22 +43,14 @@ function KegControl(props) {
 	};
 
 	const handleBuyingKeg = (id) => {
-		const purchasedKeg = this.state.kegList.filter((keg) => keg.id === id)[0];
+		const purchasedKeg = kegList[id];
 		purchasedKeg.kegQuantity -= 1;
+		const { dispatch } = props;
+		const action = a.addKeg(purchasedKeg);
+		dispatch(action);
 		if (purchasedKeg.kegQuantity < 0) {
 			purchasedKeg.kegQuantity = 0;
 		}
-
-		const newKegList = this.state.kegList
-			.filter((keg) => keg.id !== this.state.selectedKeg.id)
-			.concat(purchasedKeg);
-		const wallet = parseInt(this.state.userMoney);
-		const newPrice = parseInt(this.state.kegPrice);
-		// const newWallet = wallet - newPrice;
-		console.log(typeof wallet);
-		console.log(typeof newPrice);
-		this.setState({ kegList: newKegList });
-		// this.setState({ userMoney: newWallet});
 	};
 
 	const handleRestockingKeg = (id) => {
