@@ -1,8 +1,10 @@
-import rootReducer from '../../reducers/index';
+import rootReducer from '../../reducers/index.js';
 import formVisibleReducer from '../../reducers/form-visible-reducer';
 import kegListReducer from '../../reducers/keg-list-reducer';
 import { createStore } from 'redux';
 import * as c from '../../actions/actionTypes';
+import selectedKegReducer from '../../reducers/selected-keg-reducer';
+import editFormReducer from '../../reducers/editing-keg-reducer';
 
 let store = createStore(rootReducer);
 
@@ -11,7 +13,9 @@ describe('rootReducer', () => {
 	test('Should return default state if no action type is recognized', () => {
 		expect(rootReducer({}, { type: null })).toEqual({
 			kegList: {},
-			formVisibleOnPage: false
+			formVisibleOnPage: false,
+			editing: false,
+			selectedKeg: null
 		});
 	});
 
@@ -27,7 +31,7 @@ describe('rootReducer', () => {
 			id: 1
 		};
 		store.dispatch(action);
-		expect(store.getState().kegList).toEqual(kegListReducer(undefined, action));
+		expect(store.getState().kegList).toEqual(kegListReducer(undefined, { type: null }));
 	});
 
 	// Test Three
@@ -36,6 +40,24 @@ describe('rootReducer', () => {
 			type: c.TOGGLE_FORM
 		};
 		store.dispatch(action);
-		expect(store.getState().formVisibleOnPage).toEqual(formVisibleReducer(undefined, action));
+		expect(store.getState().formVisibleOnPage).toEqual(formVisibleReducer(undefined, { type: null }));
+	});
+
+	// Test Four
+	test('Check that the initial state of selectedKegReducer matches rootReducer', () => {
+		const action = {
+			type: c.SELECT_KEG
+		};
+		store.dispatch(action);
+		expect(store.getState().selectedKeg).toEqual(selectedKegReducer(undefined, { type: null }));
+	});
+
+	// Test Five
+	test('Check that the initial state of editFormReducer matches root reducer ', () => {
+		const action = {
+			type: c.TOGGLE_EDIT_FORM
+		};
+		store.dispatch(action);
+		expect(store.getState().editing).toEqual(editFormReducer(undefined, { type: null }));
 	});
 });
