@@ -1,9 +1,7 @@
-import * as c from './../actions/actionTypes';
-
 export default (state = {}, action) => {
 	const { kegBrand, kegName, kegPrice, kegAlcoPerc, kegQuantity, id } = action;
 	switch (action.type) {
-		case c.ADD_TICKET:
+		case 'ADD_KEG':
 			return Object.assign({}, state, {
 				[id]: {
 					kegBrand: kegBrand,
@@ -14,16 +12,10 @@ export default (state = {}, action) => {
 					id: id
 				}
 			});
-		case c.DELETE_TICKET:
+		case 'DELETE_KEG':
 			const newState = { ...state };
 			delete newState[id];
 			return newState;
-		case c.UPDATE_TIME:
-			const newKeg = Object.assign({}, state[id]);
-			const updatedState = Object.assign({}, state, {
-				[id]: newKeg
-			});
-			return updatedState;
 		default:
 			return state;
 	}
